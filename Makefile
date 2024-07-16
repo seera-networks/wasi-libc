@@ -273,7 +273,21 @@ LIBC_TOP_HALF_MUSL_SOURCES += \
     )
 endif
 
+# pthreads functions (possibly stub) for either thread model
+LIBC_TOP_HALF_MUSL_SOURCES += \
+    $(addprefix $(LIBC_TOP_HALF_MUSL_SRC_DIR)/, \
+        thread/default_attr.c \
+        thread/pthread_attr_destroy.c \
+        thread/pthread_attr_get.c \
+        thread/pthread_attr_init.c \
+        thread/pthread_attr_setdetachstate.c \
+        thread/pthread_attr_setguardsize.c \
+        thread/pthread_attr_setschedparam.c \
+        thread/pthread_attr_setstack.c \
+        thread/pthread_attr_setstacksize.c \
+    )
 ifeq ($(THREAD_MODEL), posix)
+# pthreads functions needed for actual thread support
 LIBC_TOP_HALF_MUSL_SOURCES += \
     $(addprefix $(LIBC_TOP_HALF_MUSL_SRC_DIR)/, \
         env/__init_tls.c \
@@ -284,15 +298,6 @@ LIBC_TOP_HALF_MUSL_SOURCES += \
         thread/__lock.c \
         thread/__wait.c \
         thread/__timedwait.c \
-        thread/default_attr.c \
-        thread/pthread_attr_destroy.c \
-        thread/pthread_attr_get.c \
-        thread/pthread_attr_init.c \
-        thread/pthread_attr_setdetachstate.c \
-        thread/pthread_attr_setguardsize.c \
-        thread/pthread_attr_setstack.c \
-        thread/pthread_attr_setstacksize.c \
-        thread/pthread_attr_setschedparam.c \
         thread/pthread_barrier_destroy.c \
         thread/pthread_barrier_init.c \
         thread/pthread_barrier_wait.c \
@@ -365,6 +370,13 @@ LIBC_TOP_HALF_MUSL_SOURCES += \
         thread/wasm32/wasi_thread_start.s \
     )
 endif
+ifeq ($(THREAD_MODEL), single)
+# pthreads stubs for single-threaded environment
+LIBC_TOP_HALF_MUSL_SOURCES += \
+    $(addprefix $(LIBC_TOP_HALF_DIR)/stub-pthreads/, \
+        stub-pthreads.c \
+    )
+endif
 
 MUSL_PRINTSCAN_SOURCES = \
     $(LIBC_TOP_HALF_MUSL_SRC_DIR)/internal/floatscan.c \
@@ -413,10 +425,10 @@ ifeq ($(THREAD_MODEL), posix)
 # https://reviews.llvm.org/D130053).
 CFLAGS += -mthread-model posix -pthread -ftls-model=local-exec
 ASMFLAGS += -matomics
+endif
 
 # Include cloudlib's directory to access the structure definition of clockid_t
 CFLAGS += -I$(LIBC_BOTTOM_HALF_CLOUDLIBC_SRC)
-endif
 
 ifneq ($(LTO),no)
 ifeq ($(LTO),full)
