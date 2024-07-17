@@ -305,6 +305,7 @@ LIBC_TOP_HALF_MUSL_SOURCES += \
         thread/pthread_rwlockattr_destroy.c \
         thread/pthread_rwlockattr_init.c \
         thread/pthread_rwlockattr_setpshared.c \
+        thread/pthread_self.c \
         thread/pthread_spin_destroy.c \
         thread/pthread_spin_init.c \
     )
@@ -355,7 +356,6 @@ LIBC_TOP_HALF_MUSL_SOURCES += \
         thread/pthread_setcancelstate.c \
         thread/pthread_setcanceltype.c \
         thread/pthread_setspecific.c \
-        thread/pthread_self.c \
         thread/pthread_spin_lock.c \
         thread/pthread_spin_trylock.c \
         thread/pthread_spin_unlock.c \
