@@ -288,6 +288,10 @@ LIBC_TOP_HALF_MUSL_SOURCES += \
         thread/pthread_barrierattr_destroy.c \
         thread/pthread_barrierattr_init.c \
         thread/pthread_barrierattr_setpshared.c \
+        thread/pthread_condattr_destroy.c \
+        thread/pthread_condattr_init.c \
+        thread/pthread_condattr_setclock.c \
+        thread/pthread_condattr_setpshared.c \
         thread/pthread_mutex_destroy.c \
         thread/pthread_mutex_init.c \
         thread/pthread_mutexattr_destroy.c \
@@ -320,10 +324,6 @@ LIBC_TOP_HALF_MUSL_SOURCES += \
         thread/pthread_cond_signal.c \
         thread/pthread_cond_timedwait.c \
         thread/pthread_cond_wait.c \
-        thread/pthread_condattr_destroy.c \
-        thread/pthread_condattr_init.c \
-        thread/pthread_condattr_setclock.c \
-        thread/pthread_condattr_setpshared.c \
         thread/pthread_create.c \
         thread/pthread_detach.c \
         thread/pthread_equal.c \
@@ -375,6 +375,7 @@ ifeq ($(THREAD_MODEL), single)
 LIBC_TOP_HALF_MUSL_SOURCES += \
     $(addprefix $(LIBC_TOP_HALF_DIR)/stub-pthreads/, \
         barrier.c \
+        condvar.c \
         mutex.c \
         stub-pthreads.c \
     )
