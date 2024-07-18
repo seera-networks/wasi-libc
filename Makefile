@@ -300,6 +300,11 @@ LIBC_TOP_HALF_MUSL_SOURCES += \
         thread/pthread_mutexattr_setpshared.c \
         thread/pthread_mutexattr_setrobust.c \
         thread/pthread_mutexattr_settype.c \
+        thread/pthread_rwlock_destroy.c \
+        thread/pthread_rwlock_init.c \
+        thread/pthread_rwlockattr_destroy.c \
+        thread/pthread_rwlockattr_init.c \
+        thread/pthread_rwlockattr_setpshared.c \
     )
 ifeq ($(THREAD_MODEL), posix)
 # pthreads functions needed for actual thread support
@@ -338,8 +343,6 @@ LIBC_TOP_HALF_MUSL_SOURCES += \
         thread/pthread_mutex_trylock.c \
         thread/pthread_mutex_unlock.c \
         thread/pthread_once.c \
-        thread/pthread_rwlock_destroy.c \
-        thread/pthread_rwlock_init.c \
         thread/pthread_rwlock_rdlock.c \
         thread/pthread_rwlock_timedrdlock.c \
         thread/pthread_rwlock_timedwrlock.c \
@@ -347,9 +350,6 @@ LIBC_TOP_HALF_MUSL_SOURCES += \
         thread/pthread_rwlock_trywrlock.c \
         thread/pthread_rwlock_unlock.c \
         thread/pthread_rwlock_wrlock.c \
-        thread/pthread_rwlockattr_destroy.c \
-        thread/pthread_rwlockattr_init.c \
-        thread/pthread_rwlockattr_setpshared.c \
         thread/pthread_setcancelstate.c \
         thread/pthread_setcanceltype.c \
         thread/pthread_setspecific.c \
@@ -377,6 +377,7 @@ LIBC_TOP_HALF_MUSL_SOURCES += \
         barrier.c \
         condvar.c \
         mutex.c \
+        rwlock.c \
         stub-pthreads.c \
     )
 endif
