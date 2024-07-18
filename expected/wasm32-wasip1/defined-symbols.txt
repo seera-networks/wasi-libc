@@ -179,6 +179,9 @@ __powf_log2_data
 __progname
 __progname_full
 __pthread_cond_timedwait
+__pthread_create
+__pthread_detach
+__pthread_join
 __pthread_mutex_consistent
 __pthread_mutex_lock
 __pthread_mutex_timedlock
@@ -964,6 +967,9 @@ pthread_condattr_getpshared
 pthread_condattr_init
 pthread_condattr_setclock
 pthread_condattr_setpshared
+pthread_create
+pthread_detach
+pthread_join
 pthread_mutex_consistent
 pthread_mutex_destroy
 pthread_mutex_init
@@ -981,6 +987,7 @@ pthread_mutexattr_setprotocol
 pthread_mutexattr_setpshared
 pthread_mutexattr_setrobust
 pthread_mutexattr_settype
+pthread_once
 pthread_rwlock_destroy
 pthread_rwlock_init
 pthread_rwlock_rdlock
@@ -999,6 +1006,8 @@ pthread_spin_init
 pthread_spin_lock
 pthread_spin_trylock
 pthread_spin_unlock
+pthread_timedjoin_np
+pthread_tryjoin_np
 putc
 putc_unlocked
 putchar
